@@ -14,7 +14,12 @@ _ALLOWED_FIRST_WORD = "select"
 
 @tool(
     name="query_db",
-    description="Runs a read-only SELECT query against a SQLite database in the workspace.",
+    description=(
+        "Runs a read-only SELECT query against a SQLite database in the workspace. "
+        "If you don't know the table or column names yet, first run "
+        "\"SELECT sql FROM sqlite_master WHERE type='table'\" to see every table's "
+        "exact structure before querying its data."
+    ),
     parameters={
         "type": "object",
         "properties": {

@@ -11,8 +11,8 @@ from .sandbox import resolve_in_sandbox
 @tool(
     name="search_files",
     description=(
-        "Searches for a text query across files in a workspace directory. "
-        "Returns matching file paths with their matching lines."
+        "Searches for a text query across files in a workspace directory "
+        "(case-insensitive). Returns matching file paths with their matching lines."
     ),
     parameters={
         "type": "object",
@@ -33,6 +33,7 @@ def search_files(query: str, directory: str = ".") -> Observation:
         return Observation(success=False, error=f"Directory not found: {directory}")
 
     matches: list[dict[str, object]] = []
+    query_lower = query.lower()
 
     for file_path in sorted(search_root.rglob("*")):
         if not file_path.is_file():
@@ -44,7 +45,7 @@ def search_files(query: str, directory: str = ".") -> Observation:
             continue
 
         for line_number, line in enumerate(lines, start=1):
-            if query in line:
+            if query_lower in line.lower():
                 matches.append(
                     {
                         "path": str(file_path.relative_to(search_root)),
