@@ -1,0 +1,8 @@
+Q1 Sales Report
+
+January: 12000
+February: 15500
+March: 13750
+
+Notes: February had the highest sales due to the winter promotion.
+The engineering team supported the promotion with a new checkout flow.
