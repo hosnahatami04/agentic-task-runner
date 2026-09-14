@@ -11,6 +11,7 @@ venv/
 env/
 .env
 *.db
+!tests/fixtures/*.db
 traces/*.json
 .mypy_cache/
 .pytest_cache/
