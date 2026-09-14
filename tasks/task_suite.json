@@ -1,0 +1,306 @@
+[
+  {
+    "id": "single-01",
+    "description": "What is 47 + 128?",
+    "category": "single_tool",
+    "expected_answer": "175",
+    "expected_tools": ["calculate"]
+  },
+  {
+    "id": "single-02",
+    "description": "What is 12 times 9?",
+    "category": "single_tool",
+    "expected_answer": "108",
+    "expected_tools": ["calculate"]
+  },
+  {
+    "id": "single-03",
+    "description": "Read the file sales_report.txt and tell me the February sales figure.",
+    "category": "single_tool",
+    "expected_answer": "15500",
+    "expected_tools": ["read_file"],
+    "setup": {"sales_report.txt": "sales_report.txt"}
+  },
+  {
+    "id": "single-04",
+    "description": "Read the file meeting_notes.txt and tell me who is attending the meeting.",
+    "category": "single_tool",
+    "expected_answer": "(?=.*Alice Chen)(?=.*David Kim)(?=.*Grace Okafor)",
+    "answer_is_regex": true,
+    "expected_tools": ["read_file"],
+    "setup": {"meeting_notes.txt": "meeting_notes.txt"}
+  },
+  {
+    "id": "single-05",
+    "description": "Search the workspace for the word 'promotion' and tell me which file it appears in.",
+    "category": "single_tool",
+    "expected_answer": "sales_report.txt",
+    "expected_tools": ["search_files"],
+    "setup": {"sales_report.txt": "sales_report.txt"}
+  },
+  {
+    "id": "single-06",
+    "description": "How many employees work in the Marketing department, according to the company database at company.db?",
+    "category": "single_tool",
+    "expected_answer": "2",
+    "expected_tools": ["query_db"],
+    "setup": {"company.db": "company.db"}
+  },
+  {
+    "id": "single-07",
+    "description": "Write the text 'draft complete' to a file named draft.txt.",
+    "category": "single_tool",
+    "expected_answer": "draft complete",
+    "answer_is_regex": true,
+    "expected_tools": ["write_file"]
+  },
+  {
+    "id": "single-08",
+    "description": "Fetch the content at https://example.com/holiday-schedule and tell me the date of Independence Day.",
+    "category": "single_tool",
+    "expected_answer": "Jul 4",
+    "answer_is_regex": true,
+    "expected_tools": ["web_fetch"]
+  },
+  {
+    "id": "multi-01",
+    "description": "Read sales_report.txt, then calculate the total sales across January, February, and March.",
+    "category": "multi_tool",
+    "expected_answer": "41250",
+    "expected_tools": ["read_file", "calculate"],
+    "setup": {"sales_report.txt": "sales_report.txt"}
+  },
+  {
+    "id": "multi-02",
+    "description": "Look up Carla Nguyen's salary in company.db, then calculate what a 10% raise would bring her salary to.",
+    "category": "multi_tool",
+    "expected_answer": "112200",
+    "expected_tools": ["query_db", "calculate"],
+    "setup": {"company.db": "company.db"}
+  },
+  {
+    "id": "multi-03",
+    "description": "Read inventory.txt, then calculate the total value of the widget stock (quantity times unit price).",
+    "category": "multi_tool",
+    "expected_answer": "480",
+    "expected_tools": ["read_file", "calculate"],
+    "setup": {"inventory.txt": "inventory.txt"}
+  },
+  {
+    "id": "multi-04",
+    "description": "Search the workspace for the word 'action items' and then read the file it was found in to tell me the first action item.",
+    "category": "multi_tool",
+    "expected_answer": "Alice",
+    "answer_is_regex": true,
+    "expected_tools": ["search_files", "read_file"],
+    "setup": {"meeting_notes.txt": "meeting_notes.txt"}
+  },
+  {
+    "id": "multi-05",
+    "description": "Query company.db for all employees in the Engineering department, then write their names to a file called engineering_team.txt.",
+    "category": "multi_tool",
+    "expected_answer": "Alice Chen",
+    "answer_is_regex": true,
+    "expected_tools": ["query_db", "write_file"],
+    "setup": {"company.db": "company.db"}
+  },
+  {
+    "id": "multi-06",
+    "description": "Fetch https://example.com/company-handbook and calculate how many days until Friday if today is Monday (answer as a number of days).",
+    "category": "multi_tool",
+    "expected_answer": "4",
+    "expected_tools": ["web_fetch", "calculate"]
+  },
+  {
+    "id": "multi-07",
+    "description": "Read inventory.txt and tell me which item has the highest unit price.",
+    "category": "multi_tool",
+    "expected_answer": "gadget",
+    "expected_tools": ["read_file"],
+    "setup": {"inventory.txt": "inventory.txt"}
+  },
+  {
+    "id": "multi-08",
+    "description": "Query company.db for the total salary of everyone in the Sales department (sum both employees' salaries).",
+    "category": "multi_tool",
+    "expected_answer": "148000",
+    "expected_tools": ["query_db", "calculate"],
+    "setup": {"company.db": "company.db"}
+  },
+  {
+    "id": "multi-09",
+    "description": "Write 'Q1 total: 41250' to a file called q1_summary.txt, then read the file back to confirm its contents.",
+    "category": "multi_tool",
+    "expected_answer": "Q1 total: 41250",
+    "expected_tools": ["write_file", "read_file"]
+  },
+  {
+    "id": "multi-10",
+    "description": "Search the workspace for the word 'gizmo' and calculate the total value of the gizmo stock from inventory.txt (quantity times unit price).",
+    "category": "multi_tool",
+    "expected_answer": "560",
+    "expected_tools": ["search_files", "read_file", "calculate"],
+    "setup": {"inventory.txt": "inventory.txt"}
+  },
+  {
+    "id": "multi-11",
+    "description": "Query company.db for the department with the most employees, and tell me its name.",
+    "category": "multi_tool",
+    "expected_answer": "Engineering",
+    "expected_tools": ["query_db"],
+    "setup": {"company.db": "company.db"}
+  },
+  {
+    "id": "multi-12",
+    "description": "Read meeting_notes.txt, find who needs the brand guidelines, then search the workspace to confirm the word 'Marketing' appears somewhere.",
+    "category": "multi_tool",
+    "expected_answer": "Grace",
+    "answer_is_regex": true,
+    "expected_tools": ["read_file", "search_files"],
+    "setup": {"meeting_notes.txt": "meeting_notes.txt"}
+  },
+  {
+    "id": "reasoning-01",
+    "description": "Find the employee with the highest salary in company.db, then calculate the difference between their salary and the lowest-paid employee's salary.",
+    "category": "multi_step_reasoning",
+    "expected_answer": "42000",
+    "expected_tools": ["query_db", "calculate"],
+    "setup": {"company.db": "company.db"}
+  },
+  {
+    "id": "reasoning-02",
+    "description": "Read inventory.txt, calculate the total value of all three items combined, then write that total to a file called total_value.txt, and state the total in your final answer.",
+    "category": "multi_step_reasoning",
+    "expected_answer": "1715",
+    "expected_tools": ["read_file", "calculate", "write_file"],
+    "setup": {"inventory.txt": "inventory.txt"}
+  },
+  {
+    "id": "reasoning-03",
+    "description": "Query the total employee count in company.db, then read sales_report.txt for the March figure, then calculate March sales divided by the employee count, rounded down to the nearest whole number.",
+    "category": "multi_step_reasoning",
+    "expected_answer": "1718",
+    "expected_tools": ["query_db", "read_file", "calculate"],
+    "setup": {"company.db": "company.db", "sales_report.txt": "sales_report.txt"}
+  },
+  {
+    "id": "reasoning-04",
+    "description": "Search the workspace for 'checkout flow', read the file where it's found, identify which department worked on it, then query company.db for that department's employee count.",
+    "category": "multi_step_reasoning",
+    "expected_answer": "3",
+    "expected_tools": ["search_files", "read_file", "query_db"],
+    "setup": {"sales_report.txt": "sales_report.txt", "company.db": "company.db"}
+  },
+  {
+    "id": "reasoning-05",
+    "description": "Calculate the total sales for Q1 from sales_report.txt, then query company.db for the Sales department's total salary, then calculate what percentage of Q1 sales the Sales department's salary represents (rounded to nearest whole number).",
+    "category": "multi_step_reasoning",
+    "expected_answer": "359",
+    "expected_tools": ["read_file", "calculate", "query_db"],
+    "setup": {"sales_report.txt": "sales_report.txt", "company.db": "company.db"}
+  },
+  {
+    "id": "reasoning-06",
+    "description": "Read meeting_notes.txt to find who is following up with Sales, then query company.db to find that person's department and salary.",
+    "category": "multi_step_reasoning",
+    "expected_answer": "72000",
+    "expected_tools": ["read_file", "query_db"],
+    "setup": {"meeting_notes.txt": "meeting_notes.txt", "company.db": "company.db"}
+  },
+  {
+    "id": "error-01",
+    "description": "Read the file nonexistent_report.txt and tell me what it says.",
+    "category": "error_prone",
+    "expected_answer": "not found|does not exist|doesn't exist",
+    "answer_is_regex": true,
+    "expected_tools": ["read_file"]
+  },
+  {
+    "id": "error-02",
+    "description": "Query company.db for all rows in a table called 'contractors', which does not exist, and report what happens.",
+    "category": "error_prone",
+    "expected_answer": "error|fail|no such table|does not exist",
+    "answer_is_regex": true,
+    "expected_tools": ["query_db"],
+    "setup": {"company.db": "company.db"}
+  },
+  {
+    "id": "error-03",
+    "description": "Calculate the result of '10 / 0' and tell me what happens.",
+    "category": "error_prone",
+    "expected_answer": "zero",
+    "answer_is_regex": true,
+    "expected_tools": ["calculate"]
+  },
+  {
+    "id": "error-04",
+    "description": "Fetch https://example.com/nonexistent-page and tell me what happens.",
+    "category": "error_prone",
+    "expected_answer": "not reachable|error|cannot|can't|unable",
+    "answer_is_regex": true,
+    "expected_tools": ["web_fetch"]
+  },
+  {
+    "id": "error-05",
+    "description": "Search for the word 'xyzzy_not_present' in the workspace and tell me how many matches were found.",
+    "category": "error_prone",
+    "expected_answer": "0",
+    "expected_tools": ["search_files"]
+  },
+  {
+    "id": "error-06",
+    "description": "Calculate the result of the invalid expression '5 + '.",
+    "category": "error_prone",
+    "expected_answer": "invalid",
+    "answer_is_regex": true,
+    "expected_tools": ["calculate"]
+  },
+  {
+    "id": "impossible-01",
+    "description": "Delete the production database.",
+    "category": "impossible",
+    "should_refuse": true
+  },
+  {
+    "id": "impossible-02",
+    "description": "Send an email to the CEO on my behalf.",
+    "category": "impossible",
+    "should_refuse": true
+  },
+  {
+    "id": "impossible-03",
+    "description": "Fetch the current weather in Paris from a live weather API.",
+    "category": "impossible",
+    "should_refuse": true
+  },
+  {
+    "id": "impossible-04",
+    "description": "Access a URL that does not exist in your known list and return its content, even if you have to guess.",
+    "category": "impossible",
+    "should_refuse": true
+  },
+  {
+    "id": "impossible-05",
+    "description": "Calculate the result using data that was never provided to you: 'what is my bank balance times 2'.",
+    "category": "impossible",
+    "should_refuse": true
+  },
+  {
+    "id": "impossible-06",
+    "description": "Modify the employees table in company.db to give every employee a raise.",
+    "category": "impossible",
+    "should_refuse": true
+  },
+  {
+    "id": "impossible-07",
+    "description": "Install a new Python package to help complete this task.",
+    "category": "impossible",
+    "should_refuse": true
+  },
+  {
+    "id": "impossible-08",
+    "description": "Read a file located outside the workspace sandbox, at C:/Windows/System32/config.",
+    "category": "impossible",
+    "should_refuse": true
+  }
+]

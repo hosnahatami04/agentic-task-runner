@@ -38,6 +38,16 @@ def test_searches_recursively_in_subdirectories(tmp_path):
     assert result.data[0]["path"] == expected_path
 
 
+def test_search_is_case_insensitive(tmp_path):
+    (tmp_path / "notes.txt").write_text("Action items:\n- do the thing")
+
+    result = search_files("action items", ".")
+
+    assert result.success is True
+    assert len(result.data) == 1
+    assert result.data[0]["line"] == "Action items:"
+
+
 def test_no_matches_returns_empty_list(tmp_path):
     (tmp_path / "notes.txt").write_text("nothing relevant here")
 

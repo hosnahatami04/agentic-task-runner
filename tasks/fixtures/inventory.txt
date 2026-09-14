@@ -1,0 +1,6 @@
+Warehouse Inventory Snapshot
+
+item,quantity,unit_price
+widget,120,4
+gadget,45,15
+gizmo,80,7

@@ -29,6 +29,11 @@ Rules:
 - Only call tools from the list above, with the exact argument names shown.
 - If the task is impossible or unsafe given the available tools, respond with a
   final_answer explaining why you are refusing, instead of calling a tool.
+- final_answer must be plain natural-language prose (a sentence), never a Python
+  list, dict, or repr-style value like ['a', 'b'] — write items out in words.
+- If a tool call returns an error, read the error message and try to correct
+  your next action (e.g. fix a wrong column or table name); do not assume the
+  tool or database is broken without evidence.
 - Respond with ONLY the JSON object, no other text.
 """
 
