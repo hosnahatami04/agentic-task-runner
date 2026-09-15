@@ -5,6 +5,7 @@ from unittest.mock import patch
 import pytest
 
 from agent.loop import run_task
+from harness.fault_injector import TimeoutError_
 from tools import registry
 
 
@@ -99,6 +100,24 @@ def test_unparseable_response_recorded_and_loop_continues(add_tool):
     assert trace.final_answer == "done"
     assert len(trace.steps) == 2
     assert "Failed to parse" in trace.steps[0].thought
+
+
+def test_tool_timeout_produces_error_observation_and_continues(add_tool):
+    @registry.tool(name="flaky", description="Sometimes times out.", parameters={})
+    def flaky():
+        raise TimeoutError_("Simulated timeout: tool did not respond in time")
+
+    responses = [
+        '{"thought": "trying flaky tool", "action": {"tool_name": "flaky", "arguments": {}}}',
+        '{"thought": "it timed out, giving up", "final_answer": "could not complete"}',
+    ]
+
+    with patch("agent.loop.generate", side_effect=responses):
+        trace = run_task("t7", "Use the flaky tool")
+
+    assert trace.success is True
+    assert trace.steps[0].observation.success is False
+    assert "timeout" in trace.steps[0].observation.error.lower()
 
 
 def test_max_steps_exceeded_returns_failed_trace(add_tool):

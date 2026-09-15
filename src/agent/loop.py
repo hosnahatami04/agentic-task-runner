@@ -5,6 +5,7 @@ from __future__ import annotations
 from agent.models import Observation, Step, Trace
 from agent.parser import ParseError, parse_response
 from agent.prompt import build_system_prompt
+from harness.fault_injector import TimeoutError_
 from llm.ollama_client import generate
 from tools.registry import get_tool, list_schemas
 
@@ -35,6 +36,8 @@ def _execute_action(action) -> Observation:
         result = tool_func(**action.arguments)
     except TypeError as exc:
         return Observation(success=False, error=f"Invalid arguments for {action.tool_name}: {exc}")
+    except TimeoutError_ as exc:
+        return Observation(success=False, error=str(exc))
 
     if isinstance(result, Observation):
         return result
