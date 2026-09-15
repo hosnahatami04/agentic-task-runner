@@ -7,7 +7,7 @@ Usage:
 
 import sys
 
-from tools import calculator, file_ops, search, sqlite_query, web_fetch  # noqa: F401
+from tools import calculator, document_reader, file_ops, search, sqlite_query  # noqa: F401
 
 from agent.loop import run_task
 

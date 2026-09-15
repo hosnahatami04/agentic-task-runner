@@ -11,7 +11,7 @@ SUITE_PATH = Path(__file__).parent.parent / "tasks" / "task_suite.json"
 def test_suite_file_loads_and_validates():
     tasks = load_task_suite(SUITE_PATH)
 
-    assert len(tasks) == 40
+    assert len(tasks) == 37
 
 
 def test_all_task_ids_are_unique():
@@ -26,10 +26,10 @@ def test_category_distribution_matches_plan():
 
     counts = Counter(t.category for t in tasks)
 
-    assert counts[TaskCategory.SINGLE_TOOL] == 8
-    assert counts[TaskCategory.MULTI_TOOL] == 12
+    assert counts[TaskCategory.SINGLE_TOOL] == 7
+    assert counts[TaskCategory.MULTI_TOOL] == 11
     assert counts[TaskCategory.MULTI_STEP_REASONING] == 6
-    assert counts[TaskCategory.ERROR_PRONE] == 6
+    assert counts[TaskCategory.ERROR_PRONE] == 5
     assert counts[TaskCategory.IMPOSSIBLE] == 8
 
 
