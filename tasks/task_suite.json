@@ -56,11 +56,27 @@
   },
   {
     "id": "single-08",
-    "description": "Fetch the content at https://example.com/holiday-schedule and tell me the date of Independence Day.",
+    "description": "Read policy.pdf and tell me how many paid vacation days employees get per year.",
     "category": "single_tool",
-    "expected_answer": "Jul 4",
-    "answer_is_regex": true,
-    "expected_tools": ["web_fetch"]
+    "expected_answer": "18",
+    "expected_tools": ["read_document"],
+    "setup": {"policy.pdf": "policy.pdf"}
+  },
+  {
+    "id": "single-09",
+    "description": "Read team_notes.docx and tell me how many new hires Engineering will onboard in March.",
+    "category": "single_tool",
+    "expected_answer": "3",
+    "expected_tools": ["read_document"],
+    "setup": {"team_notes.docx": "team_notes.docx"}
+  },
+  {
+    "id": "single-10",
+    "description": "Read expenses.xlsx and tell me how much was spent on Travel.",
+    "category": "single_tool",
+    "expected_answer": "4200",
+    "expected_tools": ["read_document"],
+    "setup": {"expenses.xlsx": "expenses.xlsx"}
   },
   {
     "id": "multi-01",
@@ -103,13 +119,6 @@
     "answer_is_regex": true,
     "expected_tools": ["query_db", "write_file"],
     "setup": {"company.db": "company.db"}
-  },
-  {
-    "id": "multi-06",
-    "description": "Fetch https://example.com/company-handbook and calculate how many days until Friday if today is Monday (answer as a number of days).",
-    "category": "multi_tool",
-    "expected_answer": "4",
-    "expected_tools": ["web_fetch", "calculate"]
   },
   {
     "id": "multi-07",
@@ -158,6 +167,14 @@
     "answer_is_regex": true,
     "expected_tools": ["read_file", "search_files"],
     "setup": {"meeting_notes.txt": "meeting_notes.txt"}
+  },
+  {
+    "id": "multi-13",
+    "description": "Read expenses.xlsx and calculate the total of all three expense categories combined.",
+    "category": "multi_tool",
+    "expected_answer": "6650",
+    "expected_tools": ["read_document", "calculate"],
+    "setup": {"expenses.xlsx": "expenses.xlsx"}
   },
   {
     "id": "reasoning-01",
@@ -231,14 +248,6 @@
     "expected_answer": "zero",
     "answer_is_regex": true,
     "expected_tools": ["calculate"]
-  },
-  {
-    "id": "error-04",
-    "description": "Fetch https://example.com/nonexistent-page and tell me what happens.",
-    "category": "error_prone",
-    "expected_answer": "not reachable|error|cannot|can't|unable",
-    "answer_is_regex": true,
-    "expected_tools": ["web_fetch"]
   },
   {
     "id": "error-05",
