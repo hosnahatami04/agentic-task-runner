@@ -1,4 +1,4 @@
-.PHONY: install test lint run
+.PHONY: install test lint run harness report docker-build docker-run
 
 install:
 	pip install -r requirements.txt
@@ -11,4 +11,16 @@ lint:
 	ruff check .
 
 run:
-	python -m agent.loop
+	python try_agent.py
+
+harness:
+	python run_harness.py $(PROFILE)
+
+report:
+	python generate_report.py
+
+docker-build:
+	docker build -t agentic-task-runner .
+
+docker-run:
+	docker run agentic-task-runner
