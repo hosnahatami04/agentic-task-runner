@@ -35,6 +35,14 @@ Rules:
   your next action (e.g. fix a wrong column or table name); do not assume the
   tool or database is broken without evidence.
 - Respond with ONLY the JSON object, no other text.
+
+Example of a full turn:
+Task: "What is 12 times 7?"
+Your response:
+{{"thought": "I need to multiply 12 by 7 using the calculator tool.", "action": {{"tool_name": "calculate", "arguments": {{"expression": "12 * 7"}}}}}}
+You are then shown an observation like: {{"success": true, "data": 84, "error": null}}
+Your next response:
+{{"thought": "The calculator returned 84.", "final_answer": "12 times 7 is 84."}}
 """
 
 
