@@ -1,0 +1,40 @@
+<svg viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6e7781"></path>
+    </marker>
+    <marker id="arrowAccent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f8a70"></path>
+    </marker>
+  </defs>
+
+  <!-- LLM layer -->
+  <rect x="60" y="20" width="600" height="70" rx="10" fill="#eef1f4" stroke="#c7ccd1" stroke-width="1.5"></rect>
+  <text x="360" y="50" text-anchor="middle" font-size="17" font-weight="700" fill="#1b1f23">Local LLM (Ollama — qwen2.5:7b-instruct)</text>
+  <text x="360" y="72" text-anchor="middle" font-size="12.5" fill="#57606a">Decides what to do next — purely from the tool descriptions in its prompt</text>
+
+  <path d="M360 90 L360 118" stroke="#6e7781" stroke-width="1.6" marker-end="url(#arrow)"></path>
+
+  <!-- Agent loop -->
+  <rect x="60" y="122" width="600" height="90" rx="10" fill="#e6f6f1" stroke="#1f8a70" stroke-width="1.8"></rect>
+  <text x="360" y="152" text-anchor="middle" font-size="17" font-weight="700" fill="#136f57">Agent Loop</text>
+  <text x="360" y="175" text-anchor="middle" font-size="12.5" fill="#2c4a41">Thought → Action → Observation, replayed with full history each step</text>
+  <text x="360" y="194" text-anchor="middle" font-size="12.5" fill="#2c4a41">Bounded to a max of 10 steps</text>
+
+  <path d="M360 212 L360 240" stroke="#6e7781" stroke-width="1.6" marker-end="url(#arrow)"></path>
+
+  <!-- Tools layer -->
+  <rect x="60" y="244" width="600" height="90" rx="10" fill="#eef1f4" stroke="#c7ccd1" stroke-width="1.5"></rect>
+  <text x="360" y="274" text-anchor="middle" font-size="17" font-weight="700" fill="#1b1f23">Tools</text>
+  <text x="360" y="297" text-anchor="middle" font-size="12.5" fill="#57606a">calculate · read_file · write_file · search_files · query_db · web_fetch</text>
+  <text x="360" y="317" text-anchor="middle" font-size="12.5" fill="#57606a">Each tool declares its own name, description, and parameters</text>
+
+  <!-- Harness layer, wraps tools -->
+  <rect x="40" y="366" width="640" height="80" rx="10" fill="#fdf2e3" stroke="#c9821f" stroke-width="1.6" stroke-dasharray="7 5"></rect>
+  <text x="360" y="396" text-anchor="middle" font-size="17" font-weight="700" fill="#8a5a12">Fault-Injection Harness</text>
+  <text x="360" y="419" text-anchor="middle" font-size="12.5" fill="#6b4a1f">Wraps the tool registry transparently — the agent loop never knows it exists</text>
+  <text x="360" y="437" text-anchor="middle" font-size="12.5" fill="#6b4a1f">Injects timeouts, corrupted output, permission errors, partial failures</text>
+
+  <path d="M600 340 C 600 350, 600 356, 600 366" stroke="#c9821f" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#arrowAccent)"></path>
+  <text x="612" y="352" font-size="11.5" fill="#8a5a12">wraps</text>
+</svg>
