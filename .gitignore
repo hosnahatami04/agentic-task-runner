@@ -14,6 +14,7 @@ env/
 !tests/fixtures/*.db
 traces/**/*.json
 /workspace/
+RELIABILITY_REPORT.md
 .mypy_cache/
 .pytest_cache/
 .ruff_cache/
