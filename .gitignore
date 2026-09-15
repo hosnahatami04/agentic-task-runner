@@ -12,7 +12,7 @@ env/
 .env
 *.db
 !tests/fixtures/*.db
-traces/*.json
+traces/**/*.json
 /workspace/
 .mypy_cache/
 .pytest_cache/
