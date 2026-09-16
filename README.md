@@ -8,8 +8,11 @@ Agent demos usually show the happy path: the model calls a tool, gets a clean re
 
 It runs fully locally on Ollama, no API keys needed.
 
-<!-- TODO: 2-minute demo video goes here -->
-<!-- [![Demo](thumbnail.png)](youtube-link) -->
+## Demo
+
+[![Watch the demo](https://img.youtube.com/vi/MU8fG9-7uEw/maxresdefault.jpg)](https://youtu.be/MU8fG9-7uEw)
+
+A 2-minute walkthrough: the agent solving a multi-tool task, and what it does when the harness breaks a tool mid-run.
 
 ## Architecture
 
