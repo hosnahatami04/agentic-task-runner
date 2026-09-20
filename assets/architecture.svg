@@ -26,7 +26,7 @@
   <!-- Tools layer -->
   <rect x="60" y="244" width="600" height="90" rx="10" fill="#eef1f4" stroke="#c7ccd1" stroke-width="1.5"></rect>
   <text x="360" y="274" text-anchor="middle" font-size="17" font-weight="700" fill="#1b1f23">Tools</text>
-  <text x="360" y="297" text-anchor="middle" font-size="12.5" fill="#57606a">calculate · read_file · write_file · search_files · query_db · web_fetch</text>
+  <text x="360" y="297" text-anchor="middle" font-size="12.5" fill="#57606a">calculate · read_file · write_file · search_files · query_db · read_document</text>
   <text x="360" y="317" text-anchor="middle" font-size="12.5" fill="#57606a">Each tool declares its own name, description, and parameters</text>
 
   <!-- Harness layer, wraps tools -->
