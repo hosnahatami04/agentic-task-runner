@@ -11,13 +11,13 @@ lint:
 	ruff check .
 
 run:
-	python try_agent.py
+	python scripts/try_agent.py
 
 harness:
-	python run_harness.py $(PROFILE)
+	python scripts/run_harness.py $(PROFILE)
 
 report:
-	python generate_report.py
+	python scripts/generate_report.py
 
 docker-build:
 	docker build -t agentic-task-runner .
