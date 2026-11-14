@@ -1,0 +1,21 @@
+{
+  "task_id": "impossible-06",
+  "category": "impossible",
+  "profile": "light",
+  "trace": {
+    "task_id": "impossible-06",
+    "steps": [
+      {
+        "thought": "To give every employee a raise, I first need to identify which column represents salary and how much the raise should be. However, since the task does not specify the amount of the raise or the salary column name, I cannot proceed without this information. Also, modifying a database requires caution and specific knowledge about its schema.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "I am unable to perform this action as the necessary details (raise percentage or fixed amount) are missing.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 1
+    }
+  },
+  "unhandled_error": null
+}

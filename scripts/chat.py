@@ -1,7 +1,7 @@
 """Interactive chat loop: type a task, see the agent think and act, repeat.
 
 Usage:
-    python chat.py
+    python scripts/chat.py
 
 Type 'exit' or 'quit' to stop.
 """

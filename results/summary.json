@@ -1,0 +1,72 @@
+{
+  "profiles": {
+    "clean": {
+      "total_tasks": 41,
+      "passed_tasks": 29,
+      "task_success_rate": 0.7073170731707317,
+      "tool_error_recovery_rate": 0.4666666666666667,
+      "hallucinated_result_rate": 0.0975609756097561,
+      "average_steps_to_completion": 4.170731707317073,
+      "correct_refusal_rate": 0.875,
+      "success_rate_by_category": {
+        "error_prone": 0.4,
+        "impossible": 0.875,
+        "multi_tool": 0.6666666666666666,
+        "multi_step_reasoning": 0.5,
+        "single_tool": 0.9
+      },
+      "tool_calls": 93,
+      "injected_faults": {},
+      "tasks_with_injected_fault": 0
+    },
+    "light": {
+      "total_tasks": 41,
+      "passed_tasks": 29,
+      "task_success_rate": 0.7073170731707317,
+      "tool_error_recovery_rate": 0.4666666666666667,
+      "hallucinated_result_rate": 0.17073170731707318,
+      "average_steps_to_completion": 3.5609756097560976,
+      "correct_refusal_rate": 1.0,
+      "success_rate_by_category": {
+        "error_prone": 0.4,
+        "impossible": 1.0,
+        "multi_tool": 0.75,
+        "multi_step_reasoning": 0.3333333333333333,
+        "single_tool": 0.8
+      },
+      "tool_calls": 84,
+      "injected_faults": {
+        "timeout": 3,
+        "irrelevant_output": 1,
+        "corrupt_output": 2,
+        "permission_error": 1
+      },
+      "tasks_with_injected_fault": 5
+    },
+    "heavy": {
+      "total_tasks": 41,
+      "passed_tasks": 22,
+      "task_success_rate": 0.5365853658536586,
+      "tool_error_recovery_rate": 0.2222222222222222,
+      "hallucinated_result_rate": 0.21951219512195122,
+      "average_steps_to_completion": 4.097560975609756,
+      "correct_refusal_rate": 1.0,
+      "success_rate_by_category": {
+        "error_prone": 0.4,
+        "impossible": 1.0,
+        "multi_tool": 0.4166666666666667,
+        "multi_step_reasoning": 0.16666666666666666,
+        "single_tool": 0.6
+      },
+      "tool_calls": 94,
+      "injected_faults": {
+        "corrupt_output": 8,
+        "timeout": 6,
+        "irrelevant_output": 1,
+        "permission_error": 3
+      },
+      "tasks_with_injected_fault": 16
+    }
+  },
+  "notes": "Tool-error recovery counts every task where any tool call failed, including ordinary failures such as a missing file, which is why the clean profile has a recovery rate. Faults fired counts injected timeouts, permission errors, corrupt and irrelevant outputs; partial failures truncate real output and cannot be told apart in a trace, so they are not counted."
+}

@@ -1,0 +1,35 @@
+{
+  "task_id": "single-08",
+  "category": "single_tool",
+  "profile": "heavy",
+  "trace": {
+    "task_id": "single-08",
+    "steps": [
+      {
+        "thought": "I need to read the content of policy.pdf to find information about paid vacation days for employees.",
+        "action": {
+          "tool_name": "read_document",
+          "arguments": {
+            "path": "policy.pdf"
+          }
+        },
+        "observation": {
+          "success": true,
+          "data": "Company Policy Handbook\nAll employees are entitled to 18 paid vacation days per year.",
+          "error": null
+        }
+      },
+      {
+        "thought": "The document states that all employees are entitled to 18 paid vacation days per year.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "Employees get 18 paid vacation days per year.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 2
+    }
+  },
+  "unhandled_error": null
+}

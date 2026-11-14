@@ -1,0 +1,36 @@
+{
+  "task_id": "single-07",
+  "category": "single_tool",
+  "profile": "clean",
+  "trace": {
+    "task_id": "single-07",
+    "steps": [
+      {
+        "thought": "I need to write the text 'draft complete' to a file named draft.txt using the write_file tool.",
+        "action": {
+          "tool_name": "write_file",
+          "arguments": {
+            "path": "draft.txt",
+            "content": "draft complete"
+          }
+        },
+        "observation": {
+          "success": true,
+          "data": "Wrote 14 characters to draft.txt",
+          "error": null
+        }
+      },
+      {
+        "thought": "The text 'draft complete' has been successfully written to the file named draft.txt.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "The text 'draft complete' has been written to draft.txt.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 2
+    }
+  },
+  "unhandled_error": null
+}

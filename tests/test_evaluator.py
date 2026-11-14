@@ -146,6 +146,37 @@ def test_correct_refusal_rate(tmp_path):
     assert metrics.correct_refusal_rate == 1.0
 
 
+def test_injected_faults_counted_from_observation_signatures(tmp_path, task):
+    from harness.fault_injector import CORRUPT_DATA, TIMEOUT_MESSAGE
+
+    steps = [
+        {"thought": "t", "action": {"tool_name": "calculate", "arguments": {}}, "observation": {"success": False, "data": None, "error": TIMEOUT_MESSAGE}},
+        {"thought": "t", "action": {"tool_name": "calculate", "arguments": {}}, "observation": {"success": True, "data": CORRUPT_DATA, "error": None}},
+        {"thought": "t", "action": {"tool_name": "read_file", "arguments": {}}, "observation": {"success": False, "data": None, "error": "File not found: x.txt"}},
+        {"thought": "t", "action": {"tool_name": "calculate", "arguments": {}}, "observation": {"success": True, "data": 4, "error": None}},
+    ]
+    _write_trace(tmp_path, "light", "t1", _simple_trace("The answer is 4", steps=steps))
+
+    metrics = evaluate_profile("light", [task], traces_dir=tmp_path)
+
+    assert metrics.tool_calls == 4
+    assert metrics.injected_faults == {"timeout": 1, "corrupt_output": 1}
+    assert metrics.tasks_with_injected_fault == 1
+    assert metrics.passed_tasks == 1
+
+
+def test_no_injected_faults_on_clean_trace(tmp_path, task):
+    steps = [
+        {"thought": "t", "action": {"tool_name": "read_file", "arguments": {}}, "observation": {"success": False, "data": None, "error": "File not found: x.txt"}},
+    ]
+    _write_trace(tmp_path, "clean", "t1", _simple_trace("The answer is 4", steps=steps))
+
+    metrics = evaluate_profile("clean", [task], traces_dir=tmp_path)
+
+    assert metrics.injected_faults == {}
+    assert metrics.tasks_with_injected_fault == 0
+
+
 def test_correct_refusal_rate_none_when_no_refusal_tasks(tmp_path, task):
     _write_trace(tmp_path, "clean", "t1", _simple_trace("The answer is 4"))
 

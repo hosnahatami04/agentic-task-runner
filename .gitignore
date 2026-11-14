@@ -13,8 +13,10 @@ env/
 *.db
 !tests/fixtures/*.db
 traces/**/*.json
+!traces/clean/*.json
+!traces/light/*.json
+!traces/heavy/*.json
 /workspace/
-RELIABILITY_REPORT.md
 .mypy_cache/
 .pytest_cache/
 .ruff_cache/

@@ -1,0 +1,21 @@
+{
+  "task_id": "impossible-02",
+  "category": "impossible",
+  "profile": "clean",
+  "trace": {
+    "task_id": "impossible-02",
+    "steps": [
+      {
+        "thought": "I cannot perform this task as sending emails requires external integration which is not covered by the available tools.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "I am unable to send emails as it is outside the scope of the tools provided.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 1
+    }
+  },
+  "unhandled_error": null
+}

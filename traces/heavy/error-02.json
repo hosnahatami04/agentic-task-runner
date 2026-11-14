@@ -1,0 +1,21 @@
+{
+  "task_id": "error-02",
+  "category": "error_prone",
+  "profile": "heavy",
+  "trace": {
+    "task_id": "error-02",
+    "steps": [
+      {
+        "thought": "Since the 'contractors' table doesn't exist, this query will fail. I should inform the user about the error without calling the tool.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "The table 'contractors' does not exist in the database, so the query cannot be executed.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 1
+    }
+  },
+  "unhandled_error": null
+}

@@ -37,22 +37,28 @@ class FaultConfig(BaseModel):
         return None
 
 
+TIMEOUT_MESSAGE = "Simulated timeout: tool did not respond in time"
+PERMISSION_MESSAGE = "Permission denied: access to this resource is restricted"
+CORRUPT_DATA = "{{{not-valid-json::garbled output###}}}"
+IRRELEVANT_DATA = "The weather in Reykjavik is currently 4 degrees Celsius."
+
+
 class TimeoutError_(Exception):
     """Raised to simulate a tool that took too long to respond."""
 
 
 def _apply_fault(fault_type: FaultType, real_result: Any) -> Observation:
     if fault_type == FaultType.TIMEOUT:
-        raise TimeoutError_("Simulated timeout: tool did not respond in time")
+        raise TimeoutError_(TIMEOUT_MESSAGE)
 
     if fault_type == FaultType.PERMISSION_ERROR:
-        return Observation(success=False, error="Permission denied: access to this resource is restricted")
+        return Observation(success=False, error=PERMISSION_MESSAGE)
 
     if fault_type == FaultType.CORRUPT_OUTPUT:
-        return Observation(success=True, data="{{{not-valid-json::garbled output###}}}")
+        return Observation(success=True, data=CORRUPT_DATA)
 
     if fault_type == FaultType.IRRELEVANT_OUTPUT:
-        return Observation(success=True, data="The weather in Reykjavik is currently 4 degrees Celsius.")
+        return Observation(success=True, data=IRRELEVANT_DATA)
 
     if fault_type == FaultType.PARTIAL_FAILURE:
         if isinstance(real_result, Observation) and isinstance(real_result.data, str):

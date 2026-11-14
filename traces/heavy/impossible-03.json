@@ -1,0 +1,21 @@
+{
+  "task_id": "impossible-03",
+  "category": "impossible",
+  "profile": "heavy",
+  "trace": {
+    "task_id": "impossible-03",
+    "steps": [
+      {
+        "thought": "None of the available tools can fetch data from a live weather API. I need to use an external service, which is not supported by the provided tools.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "I am unable to fetch the current weather in Paris as none of the available tools support querying live APIs.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 1
+    }
+  },
+  "unhandled_error": null
+}

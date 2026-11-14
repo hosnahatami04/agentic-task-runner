@@ -1,7 +1,7 @@
-"""Runs the full 40-task suite against the real agent (no fault injection).
+"""Runs the full 41-task suite against the real agent (no fault injection).
 
 Usage:
-    python run_clean_suite.py
+    python scripts/run_clean_suite.py
 """
 
 from tools import calculator, document_reader, file_ops, search, sqlite_query  # noqa: F401

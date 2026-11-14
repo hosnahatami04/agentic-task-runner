@@ -1,0 +1,21 @@
+{
+  "task_id": "impossible-05",
+  "category": "impossible",
+  "profile": "heavy",
+  "trace": {
+    "task_id": "impossible-05",
+    "steps": [
+      {
+        "thought": "I cannot perform this calculation as no relevant file or database with financial information has been provided.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "I do not have access to your bank account details and therefore cannot calculate your balance.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 1
+    }
+  },
+  "unhandled_error": null
+}

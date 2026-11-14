@@ -9,18 +9,45 @@ from pathlib import Path
 from agent.task_suite import TaskDefinition
 from pydantic import BaseModel, Field
 
+from harness.fault_injector import (
+    CORRUPT_DATA,
+    IRRELEVANT_DATA,
+    PERMISSION_MESSAGE,
+    TIMEOUT_MESSAGE,
+)
+
 
 class ProfileMetrics(BaseModel):
     """Reliability metrics computed from one profile's traces."""
 
     profile: str
     total_tasks: int
+    passed_tasks: int = 0
     task_success_rate: float
     success_rate_by_category: dict[str, float] = Field(default_factory=dict)
     tool_error_recovery_rate: float | None
     hallucinated_result_rate: float
     average_steps_to_completion: float
     correct_refusal_rate: float | None
+    tool_calls: int = 0
+    injected_faults: dict[str, int] = Field(default_factory=dict)
+    tasks_with_injected_fault: int = 0
+
+
+def detect_injected_fault(observation: dict) -> str | None:
+    """Name the injected fault behind an observation, if its signature is visible.
+
+    Partial failures truncate real output and leave no signature, so they are not counted.
+    """
+    if observation.get("error") == TIMEOUT_MESSAGE:
+        return "timeout"
+    if observation.get("error") == PERMISSION_MESSAGE:
+        return "permission_error"
+    if observation.get("data") == CORRUPT_DATA:
+        return "corrupt_output"
+    if observation.get("data") == IRRELEVANT_DATA:
+        return "irrelevant_output"
+    return None
 
 
 def load_trace_records(profile_dir: Path) -> list[dict]:
@@ -74,6 +101,10 @@ def evaluate_profile(
     refusal_tasks_total = 0
     refusal_tasks_correct = 0
 
+    tool_calls = 0
+    injected_faults: dict[str, int] = {}
+    tasks_with_injected_fault = 0
+
     for record in records:
         task = tasks_by_id[record["task_id"]]
         category = task.category.value
@@ -87,6 +118,19 @@ def evaluate_profile(
 
         steps = trace["steps"]
         steps_taken_list.append(trace["metadata"].get("steps_taken", len(steps)))
+
+        task_hit_a_fault = False
+        for step in steps:
+            observation = step.get("observation")
+            if observation is None:
+                continue
+            tool_calls += 1
+            fault = detect_injected_fault(observation)
+            if fault is not None:
+                injected_faults[fault] = injected_faults.get(fault, 0) + 1
+                task_hit_a_fault = True
+        if task_hit_a_fault:
+            tasks_with_injected_fault += 1
 
         if task.should_refuse:
             refusal_tasks_total += 1
@@ -131,6 +175,7 @@ def evaluate_profile(
     return ProfileMetrics(
         profile=profile,
         total_tasks=total_tasks,
+        passed_tasks=passed_count,
         task_success_rate=passed_count / total_tasks if total_tasks else 0.0,
         success_rate_by_category=success_rate_by_category,
         tool_error_recovery_rate=recovery_rate,
@@ -139,4 +184,7 @@ def evaluate_profile(
             sum(steps_taken_list) / len(steps_taken_list) if steps_taken_list else 0.0
         ),
         correct_refusal_rate=refusal_rate,
+        tool_calls=tool_calls,
+        injected_faults=injected_faults,
+        tasks_with_injected_fault=tasks_with_injected_fault,
     )

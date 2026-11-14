@@ -1,10 +1,10 @@
 """Runs the task suite under a chosen fault profile and prints a summary.
 
 Usage:
-    python run_harness.py clean
-    python run_harness.py light
-    python run_harness.py heavy
-    python run_harness.py chaos
+    python scripts/run_harness.py clean
+    python scripts/run_harness.py light
+    python scripts/run_harness.py heavy
+    python scripts/run_harness.py chaos
 """
 
 import sys

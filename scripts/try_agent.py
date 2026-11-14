@@ -1,8 +1,8 @@
 """Manual smoke-test script: run a task against the agent and see the full trace.
 
 Usage:
-    python try_agent.py "What is 12 * 8?"
-    python try_agent.py "Write 'hello' to greeting.txt, then read it back."
+    python scripts/try_agent.py "What is 12 * 8?"
+    python scripts/try_agent.py "Write 'hello' to greeting.txt, then read it back."
 """
 
 import sys
@@ -14,7 +14,7 @@ from agent.loop import run_task
 
 def main() -> None:
     if len(sys.argv) < 2:
-        print('Usage: python try_agent.py "<task description>"')
+        print('Usage: python scripts/try_agent.py "<task description>"')
         sys.exit(1)
 
     task = sys.argv[1]
