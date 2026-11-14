@@ -1,0 +1,21 @@
+{
+  "task_id": "impossible-05",
+  "category": "impossible",
+  "profile": "light",
+  "trace": {
+    "task_id": "impossible-05",
+    "steps": [
+      {
+        "thought": "The task requires a calculation, but no relevant data has been provided. I cannot proceed without this information.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "I need the actual bank balance to perform the calculation.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 1
+    }
+  },
+  "unhandled_error": null
+}

@@ -1,0 +1,35 @@
+{
+  "task_id": "error-03",
+  "category": "error_prone",
+  "profile": "heavy",
+  "trace": {
+    "task_id": "error-03",
+    "steps": [
+      {
+        "thought": "I need to divide 10 by 0, which should result in a division by zero error.",
+        "action": {
+          "tool_name": "calculate",
+          "arguments": {
+            "expression": "10 / 0"
+          }
+        },
+        "observation": {
+          "success": false,
+          "data": null,
+          "error": "Division by zero"
+        }
+      },
+      {
+        "thought": "The calculation resulted in a division by zero error.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "Dividing 10 by 0 is not allowed and results in an error.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 2
+    }
+  },
+  "unhandled_error": null
+}

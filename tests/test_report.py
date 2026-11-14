@@ -83,6 +83,37 @@ def test_report_includes_recovery_case_study(tmp_path):
     assert "boom" in report
 
 
+def test_write_summary_json(tmp_path):
+    from harness.report import write_summary
+
+    task = TaskDefinition(
+        id="t1", description="x", category=TaskCategory.SINGLE_TOOL,
+        expected_answer="4", expected_tools=[],
+    )
+    _write_trace(tmp_path, "clean", "t1", "single_tool", _simple_trace("The answer is 4"))
+    out = tmp_path / "results" / "summary.json"
+
+    write_summary(["clean"], [task], output_path=out, traces_dir=tmp_path)
+
+    summary = json.loads(out.read_text(encoding="utf-8"))
+    assert summary["profiles"]["clean"]["passed_tasks"] == 1
+    assert summary["profiles"]["clean"]["task_success_rate"] == 1.0
+    assert "notes" in summary
+
+
+def test_report_includes_faults_fired_column(tmp_path):
+    task = TaskDefinition(
+        id="t1", description="x", category=TaskCategory.SINGLE_TOOL,
+        expected_answer="4", expected_tools=[],
+    )
+    _write_trace(tmp_path, "clean", "t1", "single_tool", _simple_trace("The answer is 4"))
+
+    report = generate_report(["clean"], [task], traces_dir=tmp_path)
+
+    assert "Faults Fired" in report
+    assert "0 of 0 calls, 0 tasks" in report
+
+
 def test_report_handles_no_case_studies_gracefully(tmp_path):
     task = TaskDefinition(
         id="t1", description="x", category=TaskCategory.SINGLE_TOOL,

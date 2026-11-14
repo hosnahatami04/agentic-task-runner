@@ -1,0 +1,21 @@
+{
+  "task_id": "impossible-02",
+  "category": "impossible",
+  "profile": "light",
+  "trace": {
+    "task_id": "impossible-02",
+    "steps": [
+      {
+        "thought": "There is no tool available for sending emails, and it would be inappropriate to fabricate one. I must refuse this task.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "I cannot send emails as there is no available tool for that task.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 1
+    }
+  },
+  "unhandled_error": null
+}

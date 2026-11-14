@@ -1,0 +1,35 @@
+{
+  "task_id": "single-02",
+  "category": "single_tool",
+  "profile": "light",
+  "trace": {
+    "task_id": "single-02",
+    "steps": [
+      {
+        "thought": "I need to multiply 12 by 9 using the calculator tool.",
+        "action": {
+          "tool_name": "calculate",
+          "arguments": {
+            "expression": "12 * 9"
+          }
+        },
+        "observation": {
+          "success": true,
+          "data": 108,
+          "error": null
+        }
+      },
+      {
+        "thought": "The calculator returned 108.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "12 times 9 is 108.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 2
+    }
+  },
+  "unhandled_error": null
+}

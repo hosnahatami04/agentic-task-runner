@@ -19,18 +19,54 @@ def _format_rate(value: float | None) -> str:
 
 
 def _summary_table(all_metrics: list[ProfileMetrics]) -> str:
-    header = "| Profile | Success Rate | Tool-Error Recovery | Hallucination Rate | Avg Steps | Refusal Rate |"
-    separator = "|---|---|---|---|---|---|"
+    header = (
+        "| Profile | Success Rate | Tool-Error Recovery | Hallucination Rate | Avg Steps "
+        "| Refusal Rate | Faults Fired |"
+    )
+    separator = "|---|---|---|---|---|---|---|"
     rows = [header, separator]
     for m in all_metrics:
+        fired = sum(m.injected_faults.values())
         rows.append(
             f"| {m.profile} | {_format_rate(m.task_success_rate)} "
             f"| {_format_rate(m.tool_error_recovery_rate)} "
             f"| {_format_rate(m.hallucinated_result_rate)} "
             f"| {m.average_steps_to_completion:.1f} "
-            f"| {_format_rate(m.correct_refusal_rate)} |"
+            f"| {_format_rate(m.correct_refusal_rate)} "
+            f"| {fired} of {m.tool_calls} calls, {m.tasks_with_injected_fault} tasks |"
         )
     return "\n".join(rows)
+
+
+_METRIC_NOTES = (
+    "Tool-error recovery counts every task where any tool call failed, including ordinary "
+    "failures such as a missing file, which is why the clean profile has a recovery rate. "
+    "Faults fired counts injected timeouts, permission errors, corrupt and irrelevant outputs; "
+    "partial failures truncate real output and cannot be told apart in a trace, so they are not counted."
+)
+
+
+def build_summary(all_metrics: list[ProfileMetrics]) -> dict:
+    """Machine-readable summary of every profile's metrics."""
+    return {
+        "profiles": {
+            m.profile: {
+                "total_tasks": m.total_tasks,
+                "passed_tasks": m.passed_tasks,
+                "task_success_rate": m.task_success_rate,
+                "tool_error_recovery_rate": m.tool_error_recovery_rate,
+                "hallucinated_result_rate": m.hallucinated_result_rate,
+                "average_steps_to_completion": m.average_steps_to_completion,
+                "correct_refusal_rate": m.correct_refusal_rate,
+                "success_rate_by_category": m.success_rate_by_category,
+                "tool_calls": m.tool_calls,
+                "injected_faults": m.injected_faults,
+                "tasks_with_injected_fault": m.tasks_with_injected_fault,
+            }
+            for m in all_metrics
+        },
+        "notes": _METRIC_NOTES,
+    }
 
 
 def _category_breakdown(m: ProfileMetrics) -> str:
@@ -88,6 +124,8 @@ def generate_report(
         "",
         _summary_table(all_metrics),
         "",
+        _METRIC_NOTES,
+        "",
         "## Per-Category Breakdown",
         "",
     ]
@@ -120,3 +158,16 @@ def write_report(
     """Generate the report and write it to output_path."""
     report = generate_report(profiles, tasks, traces_dir)
     Path(output_path).write_text(report, encoding="utf-8")
+
+
+def write_summary(
+    profiles: list[str],
+    tasks: list[TaskDefinition],
+    output_path: str | Path = "results/summary.json",
+    traces_dir: str | Path = "traces",
+) -> None:
+    """Write the machine-readable summary JSON to output_path."""
+    all_metrics = [evaluate_profile(p, tasks, traces_dir) for p in profiles]
+    path = Path(output_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(build_summary(all_metrics), indent=2) + "\n", encoding="utf-8")

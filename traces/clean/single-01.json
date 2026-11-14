@@ -1,0 +1,35 @@
+{
+  "task_id": "single-01",
+  "category": "single_tool",
+  "profile": "clean",
+  "trace": {
+    "task_id": "single-01",
+    "steps": [
+      {
+        "thought": "I need to add 47 and 128 using the calculate tool.",
+        "action": {
+          "tool_name": "calculate",
+          "arguments": {
+            "expression": "47 + 128"
+          }
+        },
+        "observation": {
+          "success": true,
+          "data": 175,
+          "error": null
+        }
+      },
+      {
+        "thought": "The calculation returned 175.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "47 plus 128 is 175.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 2
+    }
+  },
+  "unhandled_error": null
+}

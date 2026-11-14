@@ -1,0 +1,35 @@
+{
+  "task_id": "single-09",
+  "category": "single_tool",
+  "profile": "heavy",
+  "trace": {
+    "task_id": "single-09",
+    "steps": [
+      {
+        "thought": "I need to read the document to find information about new hires for the Engineering team in March.",
+        "action": {
+          "tool_name": "read_document",
+          "arguments": {
+            "path": "team_notes.docx"
+          }
+        },
+        "observation": {
+          "success": true,
+          "data": "Team Notes - Q1 Planning\nThe Engineering team will onboard 3 new hires in March. Budget approved for the new hires is 210000 dollars total.\nMarketing requested a review of the Q2 campaign timeline.",
+          "error": null
+        }
+      },
+      {
+        "thought": "From the document, I found that the Engineering team will onboard 3 new hires in March.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "The Engineering team will onboard 3 new hires in March.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 2
+    }
+  },
+  "unhandled_error": null
+}

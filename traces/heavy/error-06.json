@@ -1,0 +1,35 @@
+{
+  "task_id": "error-06",
+  "category": "error_prone",
+  "profile": "heavy",
+  "trace": {
+    "task_id": "error-06",
+    "steps": [
+      {
+        "thought": "I need to evaluate the expression '5 +' using the calculate tool, but I expect it to fail due to being an invalid expression.",
+        "action": {
+          "tool_name": "calculate",
+          "arguments": {
+            "expression": "5 + '"
+          }
+        },
+        "observation": {
+          "success": false,
+          "data": null,
+          "error": "Invalid expression: unterminated string literal (detected at line 1) (<unknown>, line 1)"
+        }
+      },
+      {
+        "thought": "The calculation failed due to an invalid expression.",
+        "action": null,
+        "observation": null
+      }
+    ],
+    "final_answer": "The expression '5 +' is invalid and cannot be evaluated.",
+    "success": true,
+    "metadata": {
+      "steps_taken": 2
+    }
+  },
+  "unhandled_error": null
+}
